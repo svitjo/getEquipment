@@ -54,7 +54,7 @@ namespace GetEquipment
             //services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BloodTransfusionCenter", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GetEquipment", Version = "v1" });
 
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
@@ -88,7 +88,7 @@ namespace GetEquipment
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BloodTransfusionCenter v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GetEquipment v1"));
 
             }
             else

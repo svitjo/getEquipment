@@ -25,5 +25,6 @@ namespace GetEquipment.Model
         public string gender { get; set; }
         public string company { get; set; }
         public Role role { get; set; }
+        public int penalty { get; set; }
     }
 }
