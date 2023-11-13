@@ -27,7 +27,16 @@ namespace GetEquipment.Controller
             var response = await authRepo.Register(
                 new User
                 {
-                    email = request.email
+                    email = request.email,
+                    password = request.password,
+                    name = request.name,
+                    lastname = request.lastname,
+                    address = request.address,
+                    city = request.city,
+                    country = request.country,
+                    phone = request.phone,
+                    gender = request.gender,
+                    company = request.company
                 }
             );
 

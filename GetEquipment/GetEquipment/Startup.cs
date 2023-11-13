@@ -22,6 +22,8 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Swagger;
 using GetEquipment.Data;
+using GetEquipment.Interface;
+using GetEquipment.Repository;
 
 namespace GetEquipment
 {
@@ -58,6 +60,8 @@ namespace GetEquipment
 
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

@@ -14,8 +14,8 @@ namespace GetEquipment.Model
         public Guid companyID { get; set; }
         public string name { get; set; }
         public string address { get; set; }
-        public List<string> equipmentInStock { get; set; }
-        public List<string> pickUpAppointments { get; set; }
+        public List<Equipment> equipmentInStock { get; set; }
+        public List<Appoitment> pickUpAppointments { get; set; }
         public double averageRating { get; set; }
     }
 }
