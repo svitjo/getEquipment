@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using GetEquipment.Data;
 using GetEquipment.Interface;
 using GetEquipment.Model;
@@ -10,22 +11,22 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GetEquipment.Model.Enum;
 using GetEquipment.Service;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace GetEquipment.Repository
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext context;
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
         private readonly IMapper mapper;
-       // private readonly EmailService _emailService;
 
         public AuthRepository(DataContext context, IConfiguration configuration, IMapper mapper)
         {
             this.mapper = mapper;
-            this.configuration = configuration;
+            this._configuration = configuration;
             this.context = context;
-            //this._emailService = emailService;
         }
         public async Task<UniversalResponse<int>> Register(User user)
         {
@@ -50,12 +51,37 @@ namespace GetEquipment.Repository
             //await SendVerificationEmail(user.email, verificationToken);
 
             return response;
-        }/*
-        private async Task SendVerificationEmail(string userEmail, Guid verificationToken)
+        }
+        /*
+        public async Task<UniversalResponse<int>> ConfirmEmailAsync(string userId, string token)
         {
-            string verificationLink = $"https://localhost:44320/api/v1/auth/verify?token={verificationToken}";
-            await _emailService.SendEmailAsync(userEmail, "Account Verification", $"Click the link to verify your account: {verificationLink}");
-        }*/
+            var user = await _userManager.FindByIdAsync(userId);
+            UniversalResponse<int> response = new UniversalResponse<int>();
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User not found";
+                return response;
+            };
+
+            var decodedToken = WebEncoders.Base64UrlDecode(token);
+            string normalToken = Encoding.UTF8.GetString(decodedToken);
+
+            var result = await _userManager.ConfirmEmailAsync(user, normalToken);
+
+            if (result.Succeeded)
+            {
+                response.Success = true;
+                response.Message = "Email confirmed successfully!";
+                return response;
+            } else 
+            {             
+                response.Success = true;
+                response.Message = "Email confirmed successfully!";
+                return response;
+            };
+        }
+        */
         public async Task<bool> UserExists(string email)
         {
             return await context.Users.AnyAsync(u => u.email.ToLower().Equals(email.ToLower()));

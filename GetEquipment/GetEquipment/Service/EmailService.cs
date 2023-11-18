@@ -1,28 +1,31 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FluentEmail.Core;
+using GetEquipment.Interface;
 
 namespace GetEquipment.Service
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
-        /* private readonly IFluentEmail _fluentEmail;
+        private IConfiguration _configuration;
 
-         public EmailService(IFluentEmail fluentEmail)
-         {
-             _fluentEmail = fluentEmail;
-         }
+        public EmailService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
-         public async Task SendEmailAsync(string to, string subject, string body)
-         {
-             var email = await _fluentEmail
-                 .To(to)
-                 .Subject(subject)
-                 .Body(body, true) // HTML body
-                 .SendAsync();
-         }
-     }*/
+        public async Task SendEmailAsync(string toEmail, string subject, string content)
+        {
+            var apiKey = _configuration["SendGridAPIKey"];
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("test@authdemo.com", "JWT Auth Demo");
+            var to = new EmailAddress(toEmail);
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
+            var response = await client.SendEmailAsync(msg);
+        }
     }
 }

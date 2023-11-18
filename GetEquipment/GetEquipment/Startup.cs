@@ -1,32 +1,26 @@
-
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Filters;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Identity;
 using GetEquipment.Data;
 using GetEquipment.Interface;
 using GetEquipment.Repository;
-
+using AutoMapper;
 using FluentEmail.Core;
+using FluentEmail.Razor;
 using FluentEmail.Smtp;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Text;
+using Swashbuckle.AspNetCore.Filters;
+using GetEquipment.Service;
 
 namespace GetEquipment
 {
@@ -51,7 +45,6 @@ namespace GetEquipment
             {
                 cfg.AddProfile(new AutoMapperProfile()); // Add your AutoMapper profile(s)
             });
-
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -84,8 +77,6 @@ namespace GetEquipment
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-
-            services.AddFluentEmail("fromemail@test.test").AddRazorRenderer().AddSmtpSender("localhost", 25);
 
             services.AddHttpContextAccessor();
         }

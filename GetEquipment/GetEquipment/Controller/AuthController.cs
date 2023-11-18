@@ -48,26 +48,21 @@ namespace GetEquipment.Controller
             return Ok(response);
         }
         /*
-                [HttpGet]
-                public async Task<IActionResult> VerifyEmail(string token)
-                {
-                    var user = await context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+                return NotFound();
 
-                    if (user == null)
-                    {
-                        return BadRequest("Invalid verification token");
-                    }
+            var result = await authRepo.ConfirmEmailAsync(userId, token);
 
-                    // Update isVerified field
-                    user.isVerified = true;
+            if (result.Success)
+            {
+                return Ok(new { message = "Email confirmed successfully" });
+            }
 
-                    // Save changes to the database
-                    await context.SaveChangesAsync();
-
-                    // Redirect to a page indicating successful verification
-                    return RedirectToAction("VerificationSuccess");
-                }
-            }*/
+            return BadRequest(result);
+        }*/
     }
 }
 

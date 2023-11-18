@@ -10,5 +10,6 @@ namespace GetEquipment.Interface
     {
         Task<UniversalResponse<int>> Register(User user);
         Task<bool> UserExists(string username);
+        //Task<UniversalResponse<int>> ConfirmEmailAsync(string userId, string token);
     }
 }
