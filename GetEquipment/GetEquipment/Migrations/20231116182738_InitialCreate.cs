@@ -11,10 +11,10 @@ namespace GetEquipment.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    companyID = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", nullable: true),
-                    address = table.Column<string>(type: "TEXT", nullable: true),
-                    averageRating = table.Column<double>(type: "REAL", nullable: false)
+                    companyID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    averageRating = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,20 +25,20 @@ namespace GetEquipment.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    userID = table.Column<Guid>(type: "TEXT", nullable: false),
-                    email = table.Column<string>(type: "TEXT", nullable: true),
-                    passwordHash = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    passwordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    name = table.Column<string>(type: "TEXT", nullable: true),
-                    lastname = table.Column<string>(type: "TEXT", nullable: true),
-                    address = table.Column<string>(type: "TEXT", nullable: true),
-                    city = table.Column<string>(type: "TEXT", nullable: true),
-                    country = table.Column<string>(type: "TEXT", nullable: true),
-                    phone = table.Column<string>(type: "TEXT", nullable: true),
-                    gender = table.Column<string>(type: "TEXT", nullable: true),
-                    company = table.Column<string>(type: "TEXT", nullable: true),
-                    role = table.Column<int>(type: "INTEGER", nullable: false),
-                    penalty = table.Column<int>(type: "INTEGER", nullable: false)
+                    userID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    city = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    company = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    role = table.Column<int>(type: "int", nullable: false),
+                    penalty = table.Column<int>(type: "int", nullable: false),
+                    isVerified = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,11 +49,11 @@ namespace GetEquipment.Migrations
                 name: "Appoitments",
                 columns: table => new
                 {
-                    appointmentId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    dateAndTimeOfAppointment = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    isSuccessful = table.Column<bool>(type: "INTEGER", nullable: false),
-                    companyName = table.Column<string>(type: "TEXT", nullable: true),
-                    companyID = table.Column<Guid>(type: "TEXT", nullable: true)
+                    appointmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    dateAndTimeOfAppointment = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    isSuccessful = table.Column<bool>(type: "bit", nullable: false),
+                    companyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    companyID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,12 +70,12 @@ namespace GetEquipment.Migrations
                 name: "Equipments",
                 columns: table => new
                 {
-                    equipmentID = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", nullable: true),
-                    description = table.Column<string>(type: "TEXT", nullable: true),
-                    equipmentType = table.Column<int>(type: "INTEGER", nullable: false),
-                    averageRating = table.Column<double>(type: "REAL", nullable: false),
-                    companyID = table.Column<Guid>(type: "TEXT", nullable: true)
+                    equipmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    equipmentType = table.Column<int>(type: "int", nullable: false),
+                    averageRating = table.Column<double>(type: "float", nullable: false),
+                    companyID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {

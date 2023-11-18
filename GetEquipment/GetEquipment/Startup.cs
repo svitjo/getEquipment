@@ -25,6 +25,9 @@ using GetEquipment.Data;
 using GetEquipment.Interface;
 using GetEquipment.Repository;
 
+using FluentEmail.Core;
+using FluentEmail.Smtp;
+
 namespace GetEquipment
 {
     public class Startup
@@ -39,7 +42,7 @@ namespace GetEquipment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
             services.AddControllers();
 
@@ -81,6 +84,8 @@ namespace GetEquipment
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
+            services.AddFluentEmail("fromemail@test.test").AddRazorRenderer().AddSmtpSender("localhost", 25);
 
             services.AddHttpContextAccessor();
         }

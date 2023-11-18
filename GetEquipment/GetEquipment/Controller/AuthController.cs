@@ -47,6 +47,27 @@ namespace GetEquipment.Controller
 
             return Ok(response);
         }
+        /*
+                [HttpGet]
+                public async Task<IActionResult> VerifyEmail(string token)
+                {
+                    var user = await context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
+
+                    if (user == null)
+                    {
+                        return BadRequest("Invalid verification token");
+                    }
+
+                    // Update isVerified field
+                    user.isVerified = true;
+
+                    // Save changes to the database
+                    await context.SaveChangesAsync();
+
+                    // Redirect to a page indicating successful verification
+                    return RedirectToAction("VerificationSuccess");
+                }
+            }*/
     }
 }
 
