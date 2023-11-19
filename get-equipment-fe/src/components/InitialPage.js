@@ -5,6 +5,8 @@ import companyService from '../services/CompanyService';
 const Home = () => {
 
     const [companies, setCompanies] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
 
     useEffect(() => {
         companyService.getCompanies()
@@ -16,6 +18,10 @@ const Home = () => {
           });
       }, []);
 
+      const filteredCompanies = companies.filter((company) =>
+      company.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="container">
             <h1>Welcome to Get Equipment!</h1>
@@ -26,11 +32,17 @@ const Home = () => {
             </div>
             <div>
             <h2>Companies:</h2>
-            <ul>
-            {companies.map((company) => (
-                <li key={company.id}>{company.name}</li>
-            ))}
-            </ul>
+                <input
+                  type="text"
+                  placeholder="Search companies..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              <ul>
+                {filteredCompanies.map((company) => (
+                  <li key={company.id}>{company.name}</li>
+                ))}
+              </ul>
             </div>
         </div>
     );
