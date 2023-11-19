@@ -15,21 +15,23 @@ const Register = (props) => {
     company: '',
     confirmPassword: ''});
 
-  if (data.password !== data.confirmPassword) {
-    alert('Passwords do not match');
-    return;
-  }
-
   const Registration = (e) => {
     e.preventDefault();
+
+    
+    if (data.password !== data.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+    }
+
     const dataToSubmit = { email: data.email, password: data.password, name: data.name, lastname: data.lastname, address: data.address, city: data.city, country: data.country, phone: data.phone, gender: data.gender, company: data.company};
 
     RegistrationService.registerUser(dataToSubmit)
       .then((result) => {
         if (result.data.Status === 'Invalid') {
-          alert('Invalid User');
+          alert('Try different email!');
         } else {
-          props.history.push('/Dashboard');
+            alert('Successfully registered!');
         }
       })
       .catch((error) => {
