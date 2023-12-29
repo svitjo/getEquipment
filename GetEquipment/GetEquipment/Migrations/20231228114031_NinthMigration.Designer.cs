@@ -4,14 +4,16 @@ using GetEquipment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GetEquipment.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231228114031_NinthMigration")]
+    partial class NinthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace GetEquipment.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("GetEquipment.Model.Appointment", b =>
+            modelBuilder.Entity("GetEquipment.Model.Appoitment", b =>
                 {
                     b.Property<Guid>("AppointmentId")
                         .ValueGeneratedOnAdd()
@@ -37,6 +39,9 @@ namespace GetEquipment.Migrations
                     b.Property<bool>("IsReserved")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("WorkCalendarCalendarId")
                         .HasColumnType("uniqueidentifier");
 
@@ -44,7 +49,7 @@ namespace GetEquipment.Migrations
 
                     b.HasIndex("WorkCalendarCalendarId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appoitments");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.Company", b =>
@@ -162,10 +167,10 @@ namespace GetEquipment.Migrations
                     b.ToTable("WorkCalendars");
                 });
 
-            modelBuilder.Entity("GetEquipment.Model.Appointment", b =>
+            modelBuilder.Entity("GetEquipment.Model.Appoitment", b =>
                 {
                     b.HasOne("GetEquipment.Model.WorkCalendar", null)
-                        .WithMany("Appointments")
+                        .WithMany("Appoitments")
                         .HasForeignKey("WorkCalendarCalendarId");
                 });
 
@@ -196,7 +201,7 @@ namespace GetEquipment.Migrations
 
             modelBuilder.Entity("GetEquipment.Model.WorkCalendar", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("Appoitments");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,11 +12,11 @@ namespace GetEquipment.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid equipmentID { get; set; }
-        public Guid companyID { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public EquipmentType equipmentType { get; set; }
-        public double averageRating { get; set; }
+        public Guid EquipmentID { get; set; }
+        public Guid CompanyID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public EquipmentType EquipmentType { get; set; }
+        public double AverageRating { get; set; }
     }
 }

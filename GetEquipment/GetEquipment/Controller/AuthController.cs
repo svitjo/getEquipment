@@ -14,31 +14,44 @@ namespace GetEquipment.Controller
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository authRepo;
+        private readonly IAuthRepository _authRepo;
 
         public AuthController(IAuthRepository authRepo)
         {
-            this.authRepo = authRepo;
+            this._authRepo = authRepo;
         }
 
         [HttpPost("Register")]
         public async Task<ActionResult<int>> Register(DTORegisterUser request)
         {
-            var response = await authRepo.Register(
+            var response = await _authRepo.Register(
                 new User
                 {
-                    email = request.email,
-                    password = request.password,
-                    name = request.name,
-                    lastname = request.lastname,
-                    address = request.address,
-                    city = request.city,
-                    country = request.country,
-                    phone = request.phone,
-                    gender = request.gender,
-                    company = request.company
+                    Email = request.Email,
+                    Password = request.Password,
+                    Name = request.Name,
+                    Lastname = request.Lastname,
+                    Address = request.Address,
+                    City = request.City,
+                    Country = request.Country,
+                    Phone = request.Phone,
+                    Gender = request.Gender,
+                    Company = request.Company
                 }
             );
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<string>> Login(User request)
+        {
+            var response = await _authRepo.Login(request.Email, request.Password);
 
             if (!response.Success)
             {

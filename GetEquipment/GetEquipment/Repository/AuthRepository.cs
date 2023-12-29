@@ -13,37 +13,40 @@ using GetEquipment.Model.Enum;
 using GetEquipment.Service;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace GetEquipment.Repository
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext context;
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration configuration;
         private readonly IMapper mapper;
 
         public AuthRepository(DataContext context, IConfiguration configuration, IMapper mapper)
         {
             this.mapper = mapper;
-            this._configuration = configuration;
+            this.configuration = configuration;
             this.context = context;
         }
         public async Task<UniversalResponse<int>> Register(User user)
         {
             UniversalResponse<int> response = new UniversalResponse<int>();
-            if (await UserExists(user.email))
+            if (await UserExists(user.Email))
             {
                 response.Success = false;
                 response.Message = "User already exists";
                 return response;
             }
 
-            user.userID = new Guid();
-            user.role = Role.EMPLOYEE;
-            user.penalty = 0;
-            user.isVerified = false;
+            user.UserID = new Guid();
+            user.Role = Role.EMPLOYEE;
+            user.Penalty = 0;
+            user.IsVerified = false;
 
-            Guid verificationToken = user.userID;
+            Guid verificationToken = user.UserID;
 
             context.Add(user);
             await context.SaveChangesAsync();
@@ -52,6 +55,50 @@ namespace GetEquipment.Repository
 
             return response;
         }
+
+        public async Task<UniversalResponse<string>> Login(string email, string password)
+        {
+            var response = new UniversalResponse<string>();
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User not found.";
+            }
+            else if (password != user.Password)
+            {
+                response.Success = false;
+                response.Message = "Wrong password.";
+            }
+            else
+            {
+                response.Data = BuildToken(user);
+            }
+
+            return response;
+        }
+
+        public string BuildToken(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
+                new Claim(ClaimTypes.Name, user.Email)
+            };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var tokenDescriptor = new JwtSecurityToken(issuer: "test", audience: "test", claims, expires: DateTime.Now.AddDays(1), signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+        }
+
+        public async Task<User> getUserById(Guid id)
+        {
+            User book = await context.Users.SingleOrDefaultAsync(b => b.UserID == id);
+            return book;
+        }
+
         /*
         public async Task<UniversalResponse<int>> ConfirmEmailAsync(string userId, string token)
         {
@@ -84,7 +131,7 @@ namespace GetEquipment.Repository
         */
         public async Task<bool> UserExists(string email)
         {
-            return await context.Users.AnyAsync(u => u.email.ToLower().Equals(email.ToLower()));
+            return await context.Users.AnyAsync(u => u.Email.ToLower().Equals(email.ToLower()));
         }
     }
 }

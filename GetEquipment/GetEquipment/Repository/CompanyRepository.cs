@@ -26,7 +26,7 @@ namespace GetEquipment.Repository
 
         public async Task<Company> GetAsync(Guid companyID)
         {
-            Company company = await _dbContext.Companies.SingleOrDefaultAsync(c => c.companyID == companyID);
+            Company company = await _dbContext.Companies.SingleOrDefaultAsync(c => c.CompanyID == companyID);
             return company;
         }
     }

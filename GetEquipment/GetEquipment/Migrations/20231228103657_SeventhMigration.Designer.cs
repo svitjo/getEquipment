@@ -4,14 +4,16 @@ using GetEquipment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GetEquipment.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231228103657_SeventhMigration")]
+    partial class SeventhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,161 +21,161 @@ namespace GetEquipment.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("GetEquipment.Model.Appointment", b =>
+            modelBuilder.Entity("GetEquipment.Model.Appoitment", b =>
                 {
-                    b.Property<Guid>("AppointmentId")
+                    b.Property<Guid>("appointmentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AdminId")
+                    b.Property<Guid?>("WorkCalendarcalendarId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DateAndTimeOfAppointment")
+                    b.Property<Guid>("adminId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("dateAndTimeOfAppointment")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DurationH")
+                    b.Property<int>("durationH")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsReserved")
+                    b.Property<bool>("isReserved")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("WorkCalendarCalendarId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("appointmentId");
 
-                    b.HasKey("AppointmentId");
+                    b.HasIndex("WorkCalendarcalendarId");
 
-                    b.HasIndex("WorkCalendarCalendarId");
-
-                    b.ToTable("Appointments");
+                    b.ToTable("Appoitments");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.Company", b =>
                 {
-                    b.Property<Guid>("CompanyID")
+                    b.Property<Guid>("companyID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("AverageRating")
+                    b.Property<double>("averageRating")
                         .HasColumnType("float");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CompanyID");
+                    b.HasKey("companyID");
 
                     b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.Equipment", b =>
                 {
-                    b.Property<Guid>("EquipmentID")
+                    b.Property<Guid>("equipmentID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("AverageRating")
+                    b.Property<double>("averageRating")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("CompanyID")
+                    b.Property<Guid>("companyID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EquipmentType")
+                    b.Property<int>("equipmentType")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EquipmentID");
+                    b.HasKey("equipmentID");
 
-                    b.HasIndex("CompanyID");
+                    b.HasIndex("companyID");
 
                     b.ToTable("Equipments");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.User", b =>
                 {
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("userID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
+                    b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Company")
+                    b.Property<string>("company")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsVerified")
+                    b.Property<bool>("isVerified")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("lastname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Penalty")
+                    b.Property<int>("penalty")
                         .HasColumnType("int");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
+                    b.Property<int>("role")
                         .HasColumnType("int");
 
-                    b.HasKey("UserID");
+                    b.HasKey("userID");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.WorkCalendar", b =>
                 {
-                    b.Property<Guid>("CalendarId")
+                    b.Property<Guid>("calendarId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
+                    b.Property<Guid>("companyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("CalendarId");
+                    b.HasKey("calendarId");
 
-                    b.HasIndex("CompanyId")
+                    b.HasIndex("companyId")
                         .IsUnique();
 
                     b.ToTable("WorkCalendars");
                 });
 
-            modelBuilder.Entity("GetEquipment.Model.Appointment", b =>
+            modelBuilder.Entity("GetEquipment.Model.Appoitment", b =>
                 {
                     b.HasOne("GetEquipment.Model.WorkCalendar", null)
-                        .WithMany("Appointments")
-                        .HasForeignKey("WorkCalendarCalendarId");
+                        .WithMany("appoitments")
+                        .HasForeignKey("WorkCalendarcalendarId");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.Equipment", b =>
                 {
                     b.HasOne("GetEquipment.Model.Company", null)
-                        .WithMany("EquipmentInStock")
-                        .HasForeignKey("CompanyID")
+                        .WithMany("equipmentInStock")
+                        .HasForeignKey("companyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -181,22 +183,22 @@ namespace GetEquipment.Migrations
             modelBuilder.Entity("GetEquipment.Model.WorkCalendar", b =>
                 {
                     b.HasOne("GetEquipment.Model.Company", null)
-                        .WithOne("WorkCalendar")
-                        .HasForeignKey("GetEquipment.Model.WorkCalendar", "CompanyId")
+                        .WithOne("workCalendar")
+                        .HasForeignKey("GetEquipment.Model.WorkCalendar", "companyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("GetEquipment.Model.Company", b =>
                 {
-                    b.Navigation("EquipmentInStock");
+                    b.Navigation("equipmentInStock");
 
-                    b.Navigation("WorkCalendar");
+                    b.Navigation("workCalendar");
                 });
 
             modelBuilder.Entity("GetEquipment.Model.WorkCalendar", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("appoitments");
                 });
 #pragma warning restore 612, 618
         }

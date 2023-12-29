@@ -16,7 +16,8 @@ namespace GetEquipment.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
-        public DbSet<Appoitment> Appoitments { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<WorkCalendar> WorkCalendars { get; set; }
 
     }
 }

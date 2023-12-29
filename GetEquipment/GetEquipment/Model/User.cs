@@ -12,19 +12,19 @@ namespace GetEquipment.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid userID { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string name { get; set; }
-        public string lastname { get; set; }
-        public string address { get; set; }
-        public string city { get; set; }
-        public string country { get; set; }
-        public string phone { get; set; }
-        public string gender { get; set; }
-        public string company { get; set; }
-        public Role role { get; set; }
-        public int penalty { get; set; }
-        public Boolean isVerified { get; set; }
+        public Guid UserID { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Lastname { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
+        public string Gender { get; set; }
+        public string Company { get; set; }
+        public Role Role { get; set; }
+        public int Penalty { get; set; }
+        public Boolean IsVerified { get; set; }
     }
 }

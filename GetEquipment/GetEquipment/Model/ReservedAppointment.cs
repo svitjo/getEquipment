@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace GetEquipment.Model
 {
-    public class Appoitment
+    public class ReservedAppointment
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid appointmentId { get; set; }
-        public DateTime dateAndTimeOfAppointment { get; set; }
-        public bool isSuccessful { get; set; }
-        public string companyName { get; set; }
+        public Guid ReservationId { get; set; }
+        public Guid AppointmentId { get; set; }
+        public Guid UserId { get; set; }
+        public bool IsCanceled { get; set; }
     }
 }
