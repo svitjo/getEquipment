@@ -79,7 +79,9 @@ namespace GetEquipment
             }));
 
             services.AddTransient<ICompanyService, CompanyService>();
-            services.AddTransient<ICompanyRepository, CompanyRepository>();;
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IEquipmentService, EquipmentService>();
+            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddControllers().AddNewtonsoftJson();
                         services.AddHttpContextAccessor();
         }
