@@ -8,6 +8,9 @@ namespace GetEquipment.Interface
 {
     public interface IAppointmentRepository
     {
-        Task<Appointment> GetAllAppointmentsByAdmin(Guid adminID);
+        Task<IEnumerable<Appointment>> GetAllAppointmentsByAdmin(Guid adminID);
+        Task<Appointment> GetAsync(Guid appointmentID);
+        Task<IEnumerable<Appointment>> GetNonReservedAppointments();
+        Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid workcalendarID);
     }
 }

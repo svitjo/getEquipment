@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace GetEquipment.Model
 {
-    public class Appointment
+    public class ReservedEquipment
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid AppointmentID { get; set; }
-        public DateTime DateAndTimeOfAppointment { get; set; }
-        public int DurationH { get; set; }
-        public bool IsReserved { get; set; }
-        public Guid AdminId { get; set; }
-        public Guid WorkCalendarID { get; set; }
+        public Guid ReservedEquipmentID { get; set; }
+        public Guid ReservedAppointmentID { get; set; }
+        public Guid EquipmentID { get; set; }
     }
 }

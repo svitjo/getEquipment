@@ -18,9 +18,27 @@ namespace GetEquipment.Repository
             _dbContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
         }
 
-        public async Task<Appointment> GetAllAppointmentsByAdmin(Guid adminID)
+        public async Task<IEnumerable<Appointment>> GetAllAppointmentsByAdmin(Guid adminID)
         {
-            Appointment appoitments = await _dbContext.Appointments.SingleOrDefaultAsync(c => c.AdminId == adminID);
+            var appoitments = await _dbContext.Appointments.Where(c => c.AdminId == adminID).ToListAsync();
+            return appoitments;
+        }
+
+        public async Task<Appointment> GetAsync(Guid appointmentID)
+        {
+            Appointment appointment = await _dbContext.Appointments.SingleOrDefaultAsync(c => c.AppointmentID == appointmentID);
+            return appointment;
+        }
+
+        public async Task<IEnumerable<Appointment>> GetNonReservedAppointments()
+        {
+            var nonReservedAppointments = await _dbContext.Appointments.Where(a => !a.IsReserved).ToListAsync();
+            return nonReservedAppointments;
+        }
+
+        public async Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid workcalendarID)
+        {
+            var appoitments = await _dbContext.Appointments.Where(c => c.WorkCalendarID == workcalendarID).ToListAsync();
             return appoitments;
         }
     }
