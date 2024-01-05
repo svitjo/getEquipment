@@ -41,5 +41,19 @@ namespace GetEquipment.Repository
             var appoitments = await _dbContext.Appointments.Where(c => c.WorkCalendarID == workcalendarID).ToListAsync();
             return appoitments;
         }
+
+        public async Task BookAppointment(Guid appointmentID)
+        {
+            var appointment = await GetAsync(appointmentID);
+            appointment.IsReserved = true;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task CancelAppointment(Guid appointmentID)
+        {
+            var appointment = await GetAsync(appointmentID);
+            appointment.IsReserved = false;
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace GetEquipment.Data
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<WorkCalendar> WorkCalendars { get; set; }
+        public DbSet<ReservedAppointment> ReservedAppointments { get; set; }
+        public DbSet<ReservedEquipment> ReservedEquipments { get; set; }
 
     }
 }

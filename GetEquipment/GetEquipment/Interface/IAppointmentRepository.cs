@@ -12,5 +12,7 @@ namespace GetEquipment.Interface
         Task<Appointment> GetAsync(Guid appointmentID);
         Task<IEnumerable<Appointment>> GetNonReservedAppointments();
         Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid workcalendarID);
+        Task BookAppointment(Guid appointmentID);
+        Task CancelAppointment(Guid appointmentID);
     }
 }
