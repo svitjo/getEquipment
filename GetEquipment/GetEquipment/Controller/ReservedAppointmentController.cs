@@ -33,6 +33,11 @@ namespace GetEquipment.Controller
 
                 return Ok("Appointment reserved successfully.");
             }
+            catch (InvalidOperationException ex)
+            {
+                _logger.Log(LogLevel.Error, ex, "User attempted to reserve an appointment that was already canceled.");
+                return BadRequest("You cannot reserve an appointment that you have already canceled.");
+            }
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, ex, "Unable to reserve appointment");

@@ -27,6 +27,14 @@ namespace GetEquipment.Repository
             ReservedAppointment appointment = await _dbContext.ReservedAppointments.SingleOrDefaultAsync(c => c.ReservationId == reservedAppointmentID);
             return appointment;
         }
+        public async Task<User> GetUserByAppointmentAsync(Guid reservedAppointmentID)
+        {
+            ReservedAppointment reservedAppointment = await _dbContext.ReservedAppointments.SingleOrDefaultAsync(c => c.ReservationId == reservedAppointmentID);
+
+            Guid userId = reservedAppointment.UserId;
+            User user = await _dbContext.Users.FindAsync(userId);
+            return user;
+        }
         public async Task AddAsync(ReservedAppointment reservedAppointment)
         {
             reservedAppointment.ReservationId = new Guid();
@@ -38,6 +46,10 @@ namespace GetEquipment.Repository
             var appointment = await GetAsync(appointmentId);
             appointment.IsCanceled = true;
             await _dbContext.SaveChangesAsync();
+        }
+        public async Task<bool> HasUserReservedAppointment(Guid userId, Guid appointmentId)
+        {
+            return await _dbContext.ReservedAppointments.AnyAsync(c => c.UserId == userId && c.AppointmentId == appointmentId && !c.IsCanceled);
         }
     }
 }

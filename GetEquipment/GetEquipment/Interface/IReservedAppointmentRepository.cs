@@ -12,5 +12,7 @@ namespace GetEquipment.Interface
         Task<ReservedAppointment> GetAsync(Guid reservedAppointmentID);
         Task AddAsync(ReservedAppointment reservedAppointment);
         Task CancelReservedAppointment(Guid reservationID);
+        Task<User> GetUserByAppointmentAsync(Guid reservedAppointmentID);
+        Task<bool> HasUserReservedAppointment(Guid userId, Guid appointmentId);
     }
 }
