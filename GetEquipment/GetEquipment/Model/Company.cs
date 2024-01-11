@@ -17,5 +17,6 @@ namespace GetEquipment.Model
         public List<Equipment> EquipmentInStock { get; set; }
         public WorkCalendar WorkCalendar { get; set; }
         public double AverageRating { get; set; }
+        public Guid AdminId { get; set; }
     }
 }

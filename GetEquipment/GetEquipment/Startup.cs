@@ -83,7 +83,11 @@ namespace GetEquipment
             services.AddTransient<IEquipmentService, EquipmentService>();
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IReservedAppointmentRepository, ReservedAppointmentRepository>();
+            services.AddTransient<IReservedAppointmentService, ReservedAppointmentService>();
             services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IReservedEquipmentRepository, ReservedEquipmentRepository>();
             services.AddControllers().AddNewtonsoftJson();
                         services.AddHttpContextAccessor();
         }

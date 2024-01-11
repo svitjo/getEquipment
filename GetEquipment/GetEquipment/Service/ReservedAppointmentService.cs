@@ -46,17 +46,19 @@ namespace GetEquipment.Service
                 await _reservedEquipmentRepository.AddAsync(reservedEquipment);
             }
         }
-        public async Task CancelAppointment(Guid appointmentId)
+        public async Task CancelAppointment(Guid reservedAppointmentId)
         {
+            var reservedAppointment = await _reservedAppointmentRepository.GetAsync(reservedAppointmentId);
+            var user = await _reservedAppointmentRepository.GetUserByAppointmentAsync(reservedAppointmentId);
+            var appointmentId = reservedAppointment.AppointmentId;
             var appointment = await _appointmentRepository.GetAsync(appointmentId);
-            var user = await _reservedAppointmentRepository.GetUserByAppointmentAsync(appointmentId);
 
             TimeSpan timeDifference = appointment.DateAndTimeOfAppointment - DateTime.UtcNow;
             int penaltyPoints = (timeDifference.TotalHours < 24) ? 2 : 1;
 
             await _appointmentRepository.CancelAppointment(appointmentId);
             await _userRepository.CancelReservedAppointmentPenalty(user.UserID, penaltyPoints);
-            await _reservedAppointmentRepository.CancelReservedAppointment(appointmentId);
+            await _reservedAppointmentRepository.CancelReservedAppointment(reservedAppointmentId);
         }
     }
 }
