@@ -40,9 +40,8 @@ namespace GetEquipment.Controller
             return Ok(companies);
         }
 
-        [HttpGet]
-        [Route("{companyID}")]
-        public async Task<ActionResult> GetAsync([FromRoute] Guid companyID)
+        [HttpGet("GetById")]
+        public async Task<ActionResult> GetAsync([FromQuery] Guid companyID)
         {
             Company company;
             try

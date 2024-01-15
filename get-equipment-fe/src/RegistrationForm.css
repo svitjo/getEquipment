@@ -1,0 +1,52 @@
+/* RegistrationForm.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .form-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .form__label {
+    width: 100px; /* Adjust the width of labels as needed */
+    margin-right: 10px;
+    text-align: right;
+  }
+  
+  .form__input {
+    flex: 1; /* Make textboxes fill the available width */
+  }
+  
+  .footer {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .btn {
+    /* Styles for your button */
+  }
+  

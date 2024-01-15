@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Header from './Header';
 import RegistrationService from '../services/RegistrationService';
+import '../RegistrationForm.css';
 
 const Register = (props) => {
   const [data, setData] = useState(
@@ -45,7 +47,9 @@ const Register = (props) => {
   };
 
   return (
+
     <div className="container">
+      <Header />
       <div className="form">
         <div className="form-body">
           <div className="username">
@@ -67,10 +71,10 @@ const Register = (props) => {
               Last Name
             </label>
             <input
+              className="form__input"
               type="text"
               id="lastName"
               name="lastname"
-              className="form__input"
               placeholder="Last Name"
               value={data.lastname}
               onChange={onChange}

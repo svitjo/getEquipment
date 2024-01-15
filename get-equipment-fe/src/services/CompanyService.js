@@ -1,9 +1,17 @@
 import axios from 'axios';
+import qs from 'qs';
 
-const apiUrl = 'https://localhost:44320/api/v1/company/GetAll';
+const apiUrl = 'https://localhost:44320/api/v1/company';
 
 const getCompanies = () => {
-  return axios.get(apiUrl);
+  return axios.get(`${apiUrl}/GetAll`);
 };
 
-export default { getCompanies };
+const getCompany = (companyID) => {
+  return axios.get(`${apiUrl}/GetById?${qs.stringify({companyID:companyID})}`);
+};
+
+export default { 
+  getCompanies,
+  getCompany
+ };

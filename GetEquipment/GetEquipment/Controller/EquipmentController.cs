@@ -40,9 +40,8 @@ namespace GetEquipment.Controller
             return Ok(equipments);
         }
 
-        [HttpGet]
-        [Route("{companyID}")]
-        public async Task<ActionResult<IEnumerable<Equipment>>> GetAllEquipmentByCompany([FromRoute] Guid companyID)
+        [HttpGet("GetAllEquipmentByCompany")]
+        public async Task<ActionResult<IEnumerable<Equipment>>> GetAllEquipmentByCompany([FromQuery] Guid companyID)
         {
             try
             {

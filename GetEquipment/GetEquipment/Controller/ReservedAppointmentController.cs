@@ -25,7 +25,7 @@ namespace GetEquipment.Controller
         }
 
         [HttpPost("ReserveAppointment")]
-        public async Task<IActionResult> ReserveAppointment([FromQuery] Guid appointmentId, [FromQuery] Guid userId, [FromQuery] IEnumerable<Guid> equipmentIds)
+        public async Task<IActionResult> ReserveAppointment([FromQuery] Guid appointmentId, Guid userId, IEnumerable<Guid> equipmentIds)
         {
             try
             {
@@ -45,8 +45,9 @@ namespace GetEquipment.Controller
             }
         }
 
-        [HttpPut("CancelAppointment/{appointmentId}")]
-        public async Task<IActionResult> CancelAppointment(Guid appointmentId)
+        [HttpPut("CancelAppointment")]
+        [Route("{appointmentId}")]
+        public async Task<IActionResult> CancelAppointment([FromRoute] Guid appointmentId)
         {
             try
             {
