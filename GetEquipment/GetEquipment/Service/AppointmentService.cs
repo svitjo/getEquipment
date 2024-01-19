@@ -26,9 +26,9 @@ namespace GetEquipment.Service
             return await _appointmentRepository.GetAsync(appointmentID);
         }
 
-        public async Task<IEnumerable<Appointment>> GetNonReservedAppointments()
+        public async Task<IEnumerable<Appointment>> GetNonReservedAppointments(Guid workcalendarID)
         {
-            return await _appointmentRepository.GetNonReservedAppointments();
+            return await _appointmentRepository.GetNonReservedAppointments(workcalendarID);
         }
 
         public async Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid workcalendarID)

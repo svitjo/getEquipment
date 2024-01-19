@@ -30,9 +30,9 @@ namespace GetEquipment.Repository
             return appointment;
         }
 
-        public async Task<IEnumerable<Appointment>> GetNonReservedAppointments()
+        public async Task<IEnumerable<Appointment>> GetNonReservedAppointments(Guid workcalendarID)
         {
-            var nonReservedAppointments = await _dbContext.Appointments.Where(a => !a.IsReserved).ToListAsync();
+            var nonReservedAppointments = await _dbContext.Appointments.Where(a => !a.IsReserved && a.WorkCalendarID == workcalendarID).ToListAsync();
             return nonReservedAppointments;
         }
 

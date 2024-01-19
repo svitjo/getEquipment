@@ -29,5 +29,6 @@ namespace GetEquipment.Repository
             Company company = await _dbContext.Companies.SingleOrDefaultAsync(c => c.CompanyID == companyID);
             return company;
         }
+
     }
 }

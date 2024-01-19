@@ -58,11 +58,11 @@ namespace GetEquipment.Controller
         }
 
         [HttpGet("GetNonReservedAppointments")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetNonReservedAppointments()
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetNonReservedAppointments(Guid workcalendarID)
         {
             try
             {
-                var appointments = await _appointmentService.GetNonReservedAppointments();
+                var appointments = await _appointmentService.GetNonReservedAppointments(workcalendarID);
                 return Ok(appointments);
             }
             catch (Exception ex)

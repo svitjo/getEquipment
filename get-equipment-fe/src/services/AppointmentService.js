@@ -11,8 +11,8 @@ const getAppointment = (appointmentID) => {
   return axios.get(`${apiUrl}/GetAsync?${qs.stringify({appointmentID:appointmentID})}`);
 };
 
-const getNonReservedAppointments = () => {
-    return axios.get(`${apiUrl}/GetNonReservedAppointments`);
+const getNonReservedAppointments = (workcalendarID) => {
+    return axios.get(`${apiUrl}/GetNonReservedAppointments?${qs.stringify({workcalendarID:workcalendarID})}`);
   };
 
 const getAllAppointmentsByCompany = (workcalendarID) => {
