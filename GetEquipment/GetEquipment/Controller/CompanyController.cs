@@ -55,21 +55,5 @@ namespace GetEquipment.Controller
             }
             return Ok(company);
         }
-
-        [HttpGet("GetWorkCalendar")]
-        public async Task<ActionResult> GetWorkCalendar([FromQuery] Guid companyID)
-        {
-            WorkCalendar workCalendar;
-            try
-            {
-                workCalendar = await _companyService.GetWorkCalendar(companyID);
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(LogLevel.Error, ex, "Unable to get work calendar");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            return Ok(workCalendar);
-        }
     }
 }

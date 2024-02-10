@@ -10,7 +10,7 @@ namespace GetEquipment.Interface
     {
         Task<IEnumerable<Appointment>> GetAllAppointmentsByAdmin(Guid adminID);
         Task<Appointment> GetAsync(Guid appointmentID);
-        Task<IEnumerable<Appointment>> GetNonReservedAppointments(Guid workcalendarID);
-        Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid workcalendarID);
+        Task<IEnumerable<Appointment>> GetNonReservedAppointments(Guid companyID);
+        Task<IEnumerable<Appointment>> GetAllAppointmentsByCompany(Guid companyID);
     }
 }

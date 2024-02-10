@@ -11,13 +11,7 @@ const getCompany = (companyID) => {
   return axios.get(`${apiUrl}/GetById?${qs.stringify({companyID:companyID})}`);
 };
 
-const getWorkCalendar = (workCalendarID) => {
-  return axios.get(`${apiUrl}/GetWorkCalendar?${qs.stringify({workCalendarID:workCalendarID})}`);
-};
-
-
 export default { 
   getCompanies,
-  getCompany,
-  getWorkCalendar
+  getCompany
  };

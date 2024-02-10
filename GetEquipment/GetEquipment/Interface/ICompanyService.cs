@@ -10,6 +10,5 @@ namespace GetEquipment.Interface
     {
         IEnumerable<Company> GetAll();
         Task<Company> GetAsync(Guid companyID);
-        Task<WorkCalendar> GetWorkCalendar(Guid companyID);
     }
 }

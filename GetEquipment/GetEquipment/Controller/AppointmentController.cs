@@ -58,11 +58,12 @@ namespace GetEquipment.Controller
         }
 
         [HttpGet("GetNonReservedAppointments")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetNonReservedAppointments(Guid workcalendarID)
+        [Route("{companyID}")]
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetNonReservedAppointments([FromRoute] Guid companyID)
         {
             try
             {
-                var appointments = await _appointmentService.GetNonReservedAppointments(workcalendarID);
+                var appointments = await _appointmentService.GetNonReservedAppointments(companyID);
                 return Ok(appointments);
             }
             catch (Exception ex)
@@ -73,12 +74,12 @@ namespace GetEquipment.Controller
         }
 
         [HttpGet("GetAllAppointmentsByCompany")]
-        [Route("{workcalendarID}")]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetAllAppointmentsByCompany([FromRoute] Guid workcalendarID)
+        [Route("{companyID}")]
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetAllAppointmentsByCompany([FromRoute] Guid companyID)
         {
             try
             {
-                var appointments = await _appointmentService.GetAllAppointmentsByCompany(workcalendarID);
+                var appointments = await _appointmentService.GetAllAppointmentsByCompany(companyID);
                 return Ok(appointments);
             }
             catch (Exception ex)

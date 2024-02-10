@@ -11,10 +11,9 @@ const CompanyDetails = () => {
   const [company, setCompany] = useState({});
   const [equipmentList, setEquipmentList] = useState([]);
   const [appointmentList, setAppointmentList] = useState([]);
-  const [workCalendarID, setWorkcalendarID] = useState(null);
 
   const handleCheckboxChange = (equipmentId) => {
-    // Implement logic to handle checkbox change (e.g., update selected equipment)
+    
   };
 
   useEffect(() => {
@@ -36,16 +35,7 @@ const CompanyDetails = () => {
         console.error('Error fetching equipment list:', error);
       });
 
-      companyService.getWorkCalendar(companyID)
-      .then((response) => {
-        setWorkcalendarID(response.data.calendarId);
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.error('Error fetching company details:', error);
-      });
-
-      appointmentService.getNonReservedAppointments(workCalendarID)
+      appointmentService.getNonReservedAppointments(companyID)
       .then((response) => {
         setAppointmentList(response.data);
         console.log(response.data)
@@ -53,7 +43,7 @@ const CompanyDetails = () => {
       .catch((error) => {
         console.error('Error fetching equipment list:', error);
       });
-  }, [companyID, workCalendarID]);
+  }, [companyID]);
 
   return (
     <div className="container">

@@ -11,12 +11,12 @@ const getAppointment = (appointmentID) => {
   return axios.get(`${apiUrl}/GetAsync?${qs.stringify({appointmentID:appointmentID})}`);
 };
 
-const getNonReservedAppointments = (workcalendarID) => {
-    return axios.get(`${apiUrl}/GetNonReservedAppointments?${qs.stringify({workcalendarID:workcalendarID})}`);
+const getNonReservedAppointments = (companyID) => {
+    return axios.get(`${apiUrl}/GetNonReservedAppointments?${qs.stringify({companyID:companyID})}`);
   };
 
-const getAllAppointmentsByCompany = (workcalendarID) => {
-    return axios.get(`${apiUrl}/GetAllAppointmentsByCompany?${qs.stringify({workcalendarID:workcalendarID})}`);
+const getAllAppointmentsByCompany = (companyID) => {
+    return axios.get(`${apiUrl}/GetAllAppointmentsByCompany?${qs.stringify({companyID:companyID})}`);
 };
 
 export default { 

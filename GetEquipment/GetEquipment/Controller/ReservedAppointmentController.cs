@@ -16,8 +16,7 @@ namespace GetEquipment.Controller
     {
         private readonly IReservedAppointmentService _reservedAppointmentService;
         private readonly ILogger<ReservedAppointmentController> _logger;
-    
-
+  
         public ReservedAppointmentController(IReservedAppointmentService reservedAppointmentService, ILogger<ReservedAppointmentController> logger)
         {
             _reservedAppointmentService = reservedAppointmentService ?? throw new ArgumentNullException(nameof(reservedAppointmentService));
